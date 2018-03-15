@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'blog/head.html' %}
+    {% include 'blog/nav.html' %}
+    <meta charset="UTF-8">
+    <title>文章列表</title>
+</head>
+<body>
+    <!--导入搜索框-->
+    {% include 'blog/show_blog_basic.html' %}
+
+    <div class="container-fluid show-blog-list row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <table class="table table-condensed">
+                <tr>
+                    <th>编号</th>
+                    <th>分类</th>
+                    <th>摘要</th>
+                    <th>时间</th>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</body>
+</html>
