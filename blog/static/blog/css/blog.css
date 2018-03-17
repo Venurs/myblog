@@ -41,3 +41,27 @@
 .table-condensed a{
     text-decoration: none;
 }
+
+/*
+add_blog.html
+*/
+.blog_title{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.blog_abstract{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.blog_title input{
+    margin: 10px auto;
+    height: 40px;
+    width: 100%;
+}
+.blog_abstract input{
+    margin: 20px auto;
+    height: 40px;
+    width: 100%;
+}

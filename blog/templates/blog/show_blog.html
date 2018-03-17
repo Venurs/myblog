@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% include 'blog/head.html' %}
+    {% include 'blog/nav.html' %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'blog/css/highlights/github.css' %}">
+</head>
+<body>
+<div style="margin-top: 80px;margin-left: 100px;margin-right: auto;display:block;word-break: break-all;word-wrap: break-word;white-space: normal">
+    {{ blog.content|safe }}
+</div>
+</body>
+</html>

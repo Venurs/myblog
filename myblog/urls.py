@@ -21,7 +21,5 @@ from django.conf.urls import url, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     url('blog/', include('blog.urls')),
-    # url('^markdown/', include('django_markdown.urls'))
-    url('^tinymce/', include('tinymce.urls'))
 ]
 

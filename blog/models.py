@@ -1,5 +1,5 @@
 from django.db import models
-from tinymce.models import HTMLField
+
 # Create your models here.
 
 
@@ -9,7 +9,7 @@ class Blog(models.Model):
     mktime = models.DateTimeField()
     classify = models.ForeignKey("Classify", on_delete=models.CASCADE)
     abstract = models.CharField(max_length=200)
-    content = HTMLField()
+    content = models.TextField()
 
 
 class Classify(models.Model):

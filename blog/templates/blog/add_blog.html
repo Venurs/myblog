@@ -1,11 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     {% include 'blog/head.html' %}
     {% include 'blog/nav.html' %}
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <link rel="stylesheet" href="{% static 'editor.md-master/examples/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'editor.md-master/css/editormd.css' %}">
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+    <script src="{% static 'editor.md-master/examples/js/jquery.min.js' %}"></script>
+    <script src="{% static 'editor.md-master/editormd.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
+    <title>添加博客</title>
+    </head>
+    <body>
+        <div id="layout" style="margin-top: 80px">
+            <header>
+                <h1>博客编辑</h1>
+                <p>
+                    <select id="editormd-theme-select">
+                        <option selected="selected" value="">select Editor.md themes</option>
+                    </select>
+                    <select id="editor-area-theme-select">
+                        <option selected="selected" value="">select editor area themes</option>
+                    </select>
+                    <select id="preview-area-theme-select">
+                        <option selected="selected" value="">select preview area themes</option>
+                    </select>
+                </p>
+            </header>
+            <form action="{% url 'add_blog' %}" method="post">
+                {% csrf_token %}
+                <div class="blog_title">
+                    <input type="text" name="title" placeholder="在此输入文章标题">
+                </div>
+                <div class="blog_abstract">
+                    <input type="text" name="abstract" placeholder="在此输入文章摘要">
+                </div>
+                   <div id="test-editormd" >
+                    <textarea name="content" style="display:none;">
+                    </textarea>
+                </div>
+                <div style="width:30%;margin: 20px auto;">
+                    <input type="submit" name="submit" value="发表博客" style="padding: 5px;width:100%" />
+                </div>
+            </form>
+        </div>
+
+
+
+
+
+
+        <script type="text/javascript">
+			var testEditor;
+            function themeSelect(id, themes, lsKey, callback)
+            {
+                var select = $("#" + id);
+
+                for (var i = 0, len = themes.length; i < len; i ++)
+                {
+                    var theme    = themes[i];
+                    var selected = (localStorage[lsKey] == theme) ? " selected=\"selected\"" : "";
+
+                    select.append("<option value=\"" + theme + "\"" + selected + ">" + theme + "</option>");
+                }
+
+                select.bind("change", function(){
+                    var theme = $(this).val();
+
+                    if (theme === "")
+                    {
+                        alert("theme == \"\"");
+                        return false;
+                    }
+
+                    console.log("lsKey =>", lsKey, theme);
+
+                    localStorage[lsKey] = theme;
+                    callback(select, theme);
+                });
+
+                return select;
+            }
+
+            $(function() {
+                testEditor = editormd("test-editormd", {
+                    width        : "90%",
+                    height       : 720,
+
+                    // Editor.md theme, default or dark, change at v1.5.0
+                    // You can also custom css class .editormd-preview-theme-xxxx
+                    theme        : (localStorage.theme) ? localStorage.theme : "dark",
+
+                    // Preview container theme, added v1.5.0
+                    // You can also custom css class .editormd-preview-theme-xxxx
+                    previewTheme : (localStorage.previewTheme) ? localStorage.previewTheme : "dark",
+
+                    // Added @v1.5.0 & after version is CodeMirror (editor area) theme
+                    editorTheme  : (localStorage.editorTheme) ? localStorage.editorTheme : "pastel-on-dark",
+                    path         : "{% static 'editor.md-master/lib/' %}"
+                });
+
+                themeSelect("editormd-theme-select", editormd.themes, "theme", function($this, theme) {
+                    testEditor.setTheme(theme);
+                });
+
+                themeSelect("editor-area-theme-select", editormd.editorThemes, "editorTheme", function($this, theme) {
+                    testEditor.setCodeMirrorTheme(theme);
+                    // or testEditor.setEditorTheme(theme);
+                });
+
+                themeSelect("preview-area-theme-select", editormd.previewThemes, "previewTheme", function($this, theme) {
+                    testEditor.setPreviewTheme(theme);
+                });
+            });
+        </script>
 </body>
 </html>

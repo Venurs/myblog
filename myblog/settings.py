@@ -25,7 +25,7 @@ SECRET_KEY = '@o#n&l5%zsmhvwwy&k)qaeh=(x!$n7lm*9g^154*mkuer_swue'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', ]
 
 
 # Application definition
@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
-    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -81,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': "blog",
         'USER': "root",
-        'PASSWORD': "Lz951231*",
+        'PASSWORD': "951231",
         "PORT": 3306,
         "CHARSET": "utf8",
     }
@@ -126,11 +125,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# MARKDOWN_EDITOR_SKIN = 'simple'
-# MARKDOWN_EXTENSIONS = ['extra']
 
-TINYMCE_DEFAULT_CONFIG = {
-    'theme': 'advanced',
-    'width': 800,
-    'height': 1000,
-}
+
+
